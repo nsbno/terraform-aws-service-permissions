@@ -8,3 +8,27 @@ terraform {
     }
   }
 }
+
+/*
+ * == SQS Queue Permissions
+ *
+ * Reference to available permissions can be found in the AWS docs:
+ * https://docs.aws.amazon.com/service-authorization/latest/reference/list_amazonsqs.html
+ */
+module "sqs_queue" {
+  source = "modules/policy"
+
+  default_permissions = ["sqs:GetQueueAttributes"]
+  explicit_permissions = {
+    receive = ["sqs:ReceiveMessage"]
+    send = ["sqs:SendMessage"]
+    delete = ["sqs:DeleteMessage"]
+  }
+
+  for_each = { for value in var.sqs_queues : value.arn => value.permissions }
+
+  role_arn = var.role_arn
+
+  resource_arn = each.key
+  permissions = each.value
+}

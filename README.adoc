@@ -26,7 +26,7 @@ module "permissions" {
 
   role_arn = module.service.role_arn
 
-  sqs = [
+  sqs_queues = [
     {
       arn = data.aws_sqs_queue.arn
       permissions = ["receive", "delete", "send"]
@@ -41,6 +41,23 @@ module "permissions" {
   ]
 }
 ----
+
+== Available Services and Permissions
+
+Here are all the services and permissions.
+
+|===
+|Service |Default Permissions |Optional Permissions |Description
+
+1.3+|`sqs_queues`
+1.3+|`sqs:GetQueueAttributes`
+|`recieve`
+|Recieve Messages from the queue
+|`send`
+|Send messages to the queue
+|`delete`
+|Delete messages from the queue
+|===
 
 == Relevant Repositories
 
