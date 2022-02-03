@@ -99,3 +99,38 @@ module "s3_bucket" {
   resource_arns = concat([each.key], formatlist("%s/*", [each.key]))
   permissions  = each.value
 }
+
+/*
+ * == DynamoDB Permissions
+ *
+ * Reference to available permissions can be found in the AWS docs:
+ * https://docs.aws.amazon.com/service-authorization/latest/reference/list_amazondynamodb.html
+ */
+module "dynamodb_table" {
+  source = "./modules/policy"
+
+  default_permissions  = []
+  explicit_permissions = {
+    get = [
+      "dynamodb:GetItem",
+      "dynamodb:BatchGetItem",
+      "dynamodb:Query",
+      "dynamodb:Scan",
+    ]
+    put = [
+      "dynamodb:PutItem",
+      "dynamodb:UpdateItem",
+    ]
+    delete = [
+      "dynamodb:DeleteItem",
+      "dynamodb:BatchWriteItem",
+    ]
+  }
+
+  for_each = {for value in var.dynamodb_tables : value.arn => value.permissions}
+
+  role_arn = var.role_arn
+
+  resource_arns = [each.key]
+  permissions  = each.value
+}

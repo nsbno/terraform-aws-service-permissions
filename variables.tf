@@ -26,3 +26,11 @@ variable "s3_buckets" {
     permissions = list(string)
   }))
 }
+
+variable "dynamodb_tables" {
+  description = "Permissions for DynamoDB Tables"
+  type = list(object({
+    arn = string
+    permissions = list(string)
+  }))
+}
