@@ -41,3 +41,9 @@ module "permissions" {
   ]
 }
 ----
+
+== Relevant Repositories
+
+Here are some relevant repositories that can be used together with this module!
+
+* link:https://github.com/nsbno/terraform-aws-ecs-service[`nsbno/terraform-aws-ecs-service`] - Create an ECS Service!
