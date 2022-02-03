@@ -34,3 +34,11 @@ variable "dynamodb_tables" {
     permissions = list(string)
   }))
 }
+
+variable "kms_keys" {
+  description = "Permissions for KMS Keys"
+  type = list(object({
+    arn = string
+    permissions = list(string)
+  }))
+}

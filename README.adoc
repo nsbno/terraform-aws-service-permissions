@@ -84,6 +84,15 @@ Here are all the services and permissions.
 |`delete`
 |Delete items in the table.
 Due to broad permissions, `BatchWrite` is located here
+
+1.3+|`kms_keys`
+1.3+|`kms:DescribeKey`
+|`data_key`
+|Generate data keys for this key
+|`decrypt`
+|Decrypt data using this key
+|`encrypt`
+|Encrypt data using this key
 |===
 
 == Relevant Repositories

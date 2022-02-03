@@ -134,3 +134,37 @@ module "dynamodb_table" {
   resource_arns = [each.key]
   permissions  = each.value
 }
+
+/*
+ * == KMS Key Permissions
+ *
+ * Reference to available permissions can be found in the AWS docs:
+ * https://docs.aws.amazon.com/service-authorization/latest/reference/list_awskeymanagementservice.html
+ */
+module "kms_key" {
+  source = "./modules/policy"
+
+  default_permissions  = [
+    # Allow for services to see details about the key.
+    # Shouldn't really give any surface area.
+    "kms:DescribeKey"
+  ]
+  explicit_permissions = {
+    data_key = [
+      "kms:GenerateDataKey*"
+    ]
+    decrypt = [
+      "kms:Decrypt"
+    ]
+    encrypt = [
+      "kms:Encrypt"
+    ]
+  }
+
+  for_each = {for value in var.kms_keys : value.arn => value.permissions}
+
+  role_arn = var.role_arn
+
+  resource_arns = [each.key]
+  permissions  = each.value
+}
