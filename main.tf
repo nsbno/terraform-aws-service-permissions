@@ -16,7 +16,7 @@ terraform {
  * https://docs.aws.amazon.com/service-authorization/latest/reference/list_amazonsqs.html
  */
 module "sqs_queue" {
-  source = "modules/policy"
+  source = "./modules/policy"
 
   default_permissions = ["sqs:GetQueueAttributes"]
   explicit_permissions = {
@@ -40,7 +40,7 @@ module "sqs_queue" {
  * https://docs.aws.amazon.com/service-authorization/latest/reference/list_amazonsns.html
  */
 module "sns_topic" {
-  source = "modules/policy"
+  source = "./modules/policy"
 
   default_permissions = ["sqs:GetQueueAttributes"]
   explicit_permissions = {
@@ -67,7 +67,7 @@ module "sns_topic" {
  * https://docs.aws.amazon.com/service-authorization/latest/reference/list_amazons3.html
  */
 module "s3_bucket" {
-  source = "modules/policy"
+  source = "./modules/policy"
 
   default_permissions  = [
     # Allow users to see which region the bucket is in.
