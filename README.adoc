@@ -14,3 +14,30 @@ This includes SQS, SNS, DynamoDB, KMS and more!
 
 Feel like something is missing?
 Open a pull request or send a message on #team-infrastructure-public!
+
+== Usage
+
+Add the module directly in your microservice's infrastructure!
+
+[source, hcl]
+----
+module "permissions" {
+  source = "github.com/nsbno/terraform-aws-service-permissions?ref=x.y.z"
+
+  role_arn = module.service.role_arn
+
+  sqs = [
+    {
+      arn = data.aws_sqs_queue.arn
+      permissions = ["receive", "delete", "send"]
+    }
+  ]
+
+  sns = [
+    {
+      arn = data.aws_sns_topic.arn
+      permissions = ["subscribe", "unsubscribe", "publish"]
+    }
+  ]
+}
+----
