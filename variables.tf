@@ -10,3 +10,11 @@ variable "sqs_queues" {
     permissions = list(string)
   }))
 }
+
+variable "sns_topics" {
+  description = "Permissions for SNS Topics"
+  type = list(object({
+    arn = string
+    permissions = list(string)
+  }))
+}
