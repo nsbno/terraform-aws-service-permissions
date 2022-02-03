@@ -29,7 +29,7 @@ module "sqs_queue" {
 
   role_arn = var.role_arn
 
-  resource_arn = each.key
+  resource_arns = [each.key]
   permissions = each.value
 }
 
@@ -56,6 +56,6 @@ module "sns_topic" {
 
   role_arn = var.role_arn
 
-  resource_arn = each.key
+  resource_arns = [each.key]
   permissions = each.value
 }

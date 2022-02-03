@@ -2,7 +2,7 @@ data "aws_iam_policy_document" "this" {
   statement {
     effect = "allow"
 
-    resources = [var.role_arn]
+    resources = var.resource_arns
 
     actions = flatten([
       # All uses of this permissions will always get the default permissions.

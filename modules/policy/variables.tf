@@ -3,9 +3,9 @@ variable "role_arn" {
   type = string
 }
 
-variable "resource_arn" {
-  description = "The ARN of the resource we're using"
-  type        = string
+variable "resource_arns" {
+  description = "The ARN(s) of the resource we're using"
+  type        = list(string)
 }
 
 variable "default_permissions" {
