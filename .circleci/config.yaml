@@ -1,0 +1,22 @@
+version: 2.1
+
+orbs:
+  terraform: circleci/terraform@3.0.0
+
+terraform_versions: &terraform_versions
+  - 1.0.11
+  - 1.1.4
+
+terraform_folders: &terraform_folders
+  - ./
+
+workflows:
+  validate:
+    jobs:
+      - terraform/validate:
+          checkout: true
+          backend: false
+          matrix:
+            parameters:
+              tag: *terraform_versions
+              path: *terraform_folders
