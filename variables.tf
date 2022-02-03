@@ -18,3 +18,11 @@ variable "sns_topics" {
     permissions = list(string)
   }))
 }
+
+variable "s3_buckets" {
+  description = "Permissions for S3 buckets"
+  type = list(object({
+    arn = string
+    permissions = list(string)
+  }))
+}

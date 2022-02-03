@@ -64,6 +64,16 @@ Here are all the services and permissions.
 |Publish a message to the topic
 |`subscription`
 |Manage your subscriptions to the topic (subscribe, unsubscribe)
+
+1.3+|`s3_buckets`
+1.3+|`s3:GetBucketLocation` +
+`s3:ListBucket`
+|`get`
+|Get data from objects in the bucket
+|`put`
+|Add and update data in the bucket
+|`delete`
+|Delete data in the bucket
 |===
 
 == Relevant Repositories

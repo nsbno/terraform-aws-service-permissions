@@ -59,3 +59,43 @@ module "sns_topic" {
   resource_arns = [each.key]
   permissions = each.value
 }
+
+/*
+ * == S3 Bucket Permissions
+ *
+ * Reference to available permissions can be found in the AWS docs:
+ * https://docs.aws.amazon.com/service-authorization/latest/reference/list_amazons3.html
+ */
+module "s3_bucket" {
+  source = "modules/policy"
+
+  default_permissions  = [
+    # Allow users to see which region the bucket is in.
+    # There isn't really any risk to this.
+    "s3:GetBucketLocation",
+    # Listing is quite often needed.
+    # Though it does potentially give a malicious actor the ability to see what
+    # kind of data is in the bucket. However, this is such a small risk, that
+    # we'll blanket allow it.
+    "s3:ListBucket"
+  ]
+  explicit_permissions = {
+    get = [
+      "s3:GetObject",
+      "s3:GetObjectVersion",
+    ]
+    put = [
+      "s3:PutObject"
+    ]
+    delete = [
+      "s3:DeleteObject"
+    ]
+  }
+
+  for_each = {for value in var.s3_buckets : value.arn => value.permissions}
+
+  role_arn = var.role_arn
+
+  resource_arns = concat([each.key], formatlist("%s/*", [each.key]))
+  permissions  = each.value
+}
