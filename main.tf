@@ -168,3 +168,40 @@ module "kms_key" {
   resource_arns = [each.key]
   permissions  = each.value
 }
+
+/*
+ * == SSM Parameter Store Permissions
+ *
+ * Reference to available permissions can be found in the AWS docs:
+ * TODO ==============
+ * https://docs.aws.amazon.com/service-authorization/latest/reference/list_awssystemsmanager.html
+ */
+module "ssm_parameter_store" {
+  source = "./modules/policy"
+
+  default_permissions  = []
+  explicit_permissions = {
+    get = [
+      "ssm:GetParameters",
+      "ssm:GetParameter",
+      "ssm:GetParameterHistory",
+      "ssm:GetParametersByPath"
+    ]
+
+    put = [
+      "ssm:PutParameter"
+    ]
+
+    delete = [
+      "ssm:DeleteParameter",
+      "ssm:DeleteParameters",
+    ]
+  }
+
+  for_each = {for value in var.ssm_parameters : value.arn => value.permissions}
+
+  role_arn = var.role_arn
+
+  resource_arns = [each.key]
+  permissions  = each.value
+}

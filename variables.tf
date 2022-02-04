@@ -42,3 +42,11 @@ variable "kms_keys" {
     permissions = list(string)
   }))
 }
+
+variable "ssm_parameters" {
+  description = "Permissions for SSM Parameters"
+  type = list(object({
+    arn = string
+    permissions = list(string)
+  }))
+}

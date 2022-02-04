@@ -93,6 +93,15 @@ Due to broad permissions, `BatchWrite` is located here
 |Decrypt data using this key
 |`encrypt`
 |Encrypt data using this key
+
+1.3+|`ssm_parameters`
+1.3+|None
+|`get`
+|Get parameters and history
+|`put`
+|Add and update parameters
+|`delete`
+|Delete parameters
 |===
 
 == Relevant Repositories
