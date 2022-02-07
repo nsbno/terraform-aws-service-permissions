@@ -1,6 +1,6 @@
 data "aws_iam_policy_document" "this" {
   statement {
-    effect = "allow"
+    effect = "Allow"
 
     resources = var.resource_arns
 
