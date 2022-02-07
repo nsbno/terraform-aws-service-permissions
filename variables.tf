@@ -9,6 +9,8 @@ variable "sqs_queues" {
     arn = string
     permissions = list(string)
   }))
+
+  default = []
 }
 
 variable "sns_topics" {
@@ -17,6 +19,8 @@ variable "sns_topics" {
     arn = string
     permissions = list(string)
   }))
+
+  default = []
 }
 
 variable "s3_buckets" {
@@ -25,6 +29,8 @@ variable "s3_buckets" {
     arn = string
     permissions = list(string)
   }))
+
+  default = []
 }
 
 variable "dynamodb_tables" {
@@ -33,6 +39,8 @@ variable "dynamodb_tables" {
     arn = string
     permissions = list(string)
   }))
+
+  default = []
 }
 
 variable "kms_keys" {
@@ -41,6 +49,8 @@ variable "kms_keys" {
     arn = string
     permissions = list(string)
   }))
+
+  default = []
 }
 
 variable "ssm_parameters" {
@@ -49,4 +59,6 @@ variable "ssm_parameters" {
     arn = string
     permissions = list(string)
   }))
+
+  default = []
 }
