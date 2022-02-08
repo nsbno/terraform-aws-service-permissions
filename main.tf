@@ -27,7 +27,7 @@ module "sqs_queue" {
 
   for_each = { for value in var.sqs_queues : value.arn => value.permissions }
 
-  role_arn = var.role_arn
+  role_name = var.role_name
 
   resource_arns = [each.key]
   permissions = each.value
@@ -54,7 +54,7 @@ module "sns_topic" {
 
   for_each = { for value in var.sns_topics : value.arn => value.permissions }
 
-  role_arn = var.role_arn
+  role_name = var.role_name
 
   resource_arns = [each.key]
   permissions = each.value
@@ -94,7 +94,7 @@ module "s3_bucket" {
 
   for_each = {for value in var.s3_buckets : value.arn => value.permissions}
 
-  role_arn = var.role_arn
+  role_name = var.role_name
 
   resource_arns = concat([each.key], formatlist("%s/*", [each.key]))
   permissions  = each.value
@@ -129,7 +129,7 @@ module "dynamodb_table" {
 
   for_each = {for value in var.dynamodb_tables : value.arn => value.permissions}
 
-  role_arn = var.role_arn
+  role_name = var.role_name
 
   resource_arns = [each.key]
   permissions  = each.value
@@ -163,7 +163,7 @@ module "kms_key" {
 
   for_each = {for value in var.kms_keys : value.arn => value.permissions}
 
-  role_arn = var.role_arn
+  role_name = var.role_name
 
   resource_arns = [each.key]
   permissions  = each.value
@@ -200,7 +200,7 @@ module "ssm_parameter_store" {
 
   for_each = {for value in var.ssm_parameters : value.arn => value.permissions}
 
-  role_arn = var.role_arn
+  role_name = var.role_name
 
   resource_arns = [each.key]
   permissions  = each.value

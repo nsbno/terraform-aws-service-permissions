@@ -20,6 +20,6 @@ data "aws_iam_policy_document" "this" {
 }
 
 resource "aws_iam_role_policy" "this" {
-  role   = var.role_arn
+  role   = var.role_name
   policy = data.aws_iam_policy_document.this.json
 }

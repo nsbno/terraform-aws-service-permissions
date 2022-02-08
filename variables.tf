@@ -1,4 +1,4 @@
-variable "role_arn" {
+variable "role_name" {
   description = "The role to attach the permissions to"
   type = string
 }
