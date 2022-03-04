@@ -102,6 +102,13 @@ Due to broad permissions, `BatchWrite` is located here
 |Add and update parameters
 |`delete`
 |Delete parameters
+
+1.2+|`cloudwatch_metrics`
+1.2+|None
+|`get`
+|Get a metric's data or statistics.
+|`put`
+|Add a datapoint to a metric.
 |===
 
 == Relevant Repositories

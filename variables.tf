@@ -62,3 +62,13 @@ variable "ssm_parameters" {
 
   default = []
 }
+
+variable "cloudwatch_metrics" {
+  description = "Permissions for CloudWatch Metrics. These endpoints don't care about the ARN, so * is recommended."
+  type = list(object({
+    arn = string
+    permissions = list(string)
+  }))
+
+  default = []
+}

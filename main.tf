@@ -173,7 +173,6 @@ module "kms_key" {
  * == SSM Parameter Store Permissions
  *
  * Reference to available permissions can be found in the AWS docs:
- * TODO ==============
  * https://docs.aws.amazon.com/service-authorization/latest/reference/list_awssystemsmanager.html
  */
 module "ssm_parameter_store" {
@@ -199,6 +198,38 @@ module "ssm_parameter_store" {
   }
 
   for_each = {for value in var.ssm_parameters : value.arn => value.permissions}
+
+  role_name = var.role_name
+
+  resource_arns = [each.key]
+  permissions  = each.value
+}
+
+/*
+ * == CloudWatch Metrics
+ *
+ * These endpoints don't care about the given ARN.
+ * But we let the user pass in an ARN to keep a consistent API.
+ *
+ * Reference to available permissions can be found in the AWS docs:
+ * https://docs.aws.amazon.com/service-authorization/latest/reference/list_amazoncloudwatch.html
+ */
+module "cloudwatch_metrics" {
+  source = "./modules/policy"
+
+  default_permissions  = []
+  explicit_permissions = {
+    get = [
+      "cloudwatch:GetMetricData",
+      "cloudwatch:GetMetricStatistics",
+    ]
+
+    put = [
+      "cloudwatch:PutMetricData"
+    ]
+  }
+
+  for_each = {for value in var.cloudwatch_metrics : value.arn => value.permissions}
 
   role_name = var.role_name
 
