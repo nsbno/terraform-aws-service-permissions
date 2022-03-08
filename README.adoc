@@ -51,8 +51,8 @@ Here are all the services and permissions.
 
 1.3+|`sqs_queues`
 1.3+|`sqs:GetQueueAttributes`
-|`recieve`
-|Recieve Messages from the queue
+|`receive`
+|Receive Messages from the queue
 |`send`
 |Send messages to the queue
 |`delete`
