@@ -236,3 +236,46 @@ module "cloudwatch_metrics" {
   resource_arns = [each.key]
   permissions  = each.value
 }
+
+/*
+ * == Secrets Manager
+ *
+ * Reference to available permissions can be found in the AWS docs:
+ * https://docs.aws.amazon.com/service-authorization/latest/reference/list_awssecretsmanager.html
+ */
+module "secrets_manager" {
+  source = "./modules/policy"
+
+  default_permissions  = [
+  ]
+  explicit_permissions = {
+    get = [
+      "secretsmanager:DescribeSecret",
+      "secretsmanager:GetSecretValue"
+    ]
+
+    create = [
+      "secretsmanager:CreateSecret"
+    ]
+
+    manage = [
+      "secretsmanager:PutSecretValue",
+      "secretsmanager:UpdateSecret",
+      "secretsmanager:RotateSecret",
+      "secretsmanager:CancelRotateSecret",
+      "secretsmanager:GetRandomPassword",
+    ]
+
+    delete = [
+      "secretsmanager:DeleteSecret",
+      "secretsmanager:RestoreSecret"
+    ]
+  }
+
+  for_each = {for value in var.secrets_manager : value.arn => value.permissions}
+
+  role_name = var.role_name
+
+  resource_arns = [each.key]
+  permissions  = each.value
+}

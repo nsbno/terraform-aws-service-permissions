@@ -72,3 +72,13 @@ variable "cloudwatch_metrics" {
 
   default = []
 }
+
+variable "secrets_manager" {
+  description = "Permissions for Secrets Manager"
+  type = list(object({
+    arn = string
+    permissions = list(string)
+  }))
+
+  default = []
+}

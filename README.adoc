@@ -109,6 +109,17 @@ Due to broad permissions, `BatchWrite` is located here
 |Get a metric's data or statistics.
 |`put`
 |Add a datapoint to a metric.
+
+1.4+|`secrets_manger`
+1.4+|None
+|`get`
+|Get a secret's value and metadata
+|`manage`
+|Manage a secret's value and metadata and rotation.
+|`create`
+|Create a secret
+|`delete`
+|Delete (or restore) a secret
 |===
 
 == Relevant Repositories
