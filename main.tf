@@ -25,7 +25,7 @@ module "sqs_queue" {
     delete  = ["sqs:DeleteMessage"]
   }
 
-  for_each = toset(var.sqs_queues)
+  for_each = { for value in var.sqs_queues : index(var.sqs_queues, value) => value }
 
   role_name = var.role_name
 
@@ -52,7 +52,7 @@ module "sns_topic" {
     ]
   }
 
-  for_each = toset(var.sns_topics)
+  for_each = { for value in var.sns_topics : index(var.sns_topics, value) => value }
 
   role_name = var.role_name
 
@@ -92,7 +92,7 @@ module "s3_bucket" {
     ]
   }
 
-  for_each = toset(var.s3_buckets)
+  for_each = { for value in var.s3_buckets : index(var.s3_buckets, value) => value }
 
   role_name = var.role_name
 
@@ -127,7 +127,7 @@ module "dynamodb_table" {
     ]
   }
 
-  for_each = toset(var.dynamodb_tables)
+  for_each = { for value in var.dynamodb_tables : index(var.dynamodb_tables, value) => value }
 
   role_name = var.role_name
 
@@ -161,7 +161,7 @@ module "kms_key" {
     ]
   }
 
-  for_each = toset(var.kms_keys)
+  for_each = { for value in var.kms_keys : index(var.kms_keys, value) => value }
 
   role_name = var.role_name
 
@@ -197,7 +197,7 @@ module "ssm_parameter_store" {
     ]
   }
 
-  for_each = toset(var.ssm_parameters)
+  for_each = { for value in var.ssm_parameters : index(var.ssm_parameters, value) => value }
 
   role_name = var.role_name
 
@@ -229,7 +229,7 @@ module "cloudwatch_metrics" {
     ]
   }
 
-  for_each = toset(var.cloudwatch_metrics)
+  for_each = { for value in var.cloudwatch_metrics : index(var.cloudwatch_metrics, value) => value }
 
   role_name = var.role_name
 
@@ -272,7 +272,7 @@ module "secrets_manager" {
     ]
   }
 
-  for_each = toset(var.secrets_manager)
+  for_each = { for value in var.secrets_manager : index(var.secrets_manager, value) => value }
 
   role_name = var.role_name
 
