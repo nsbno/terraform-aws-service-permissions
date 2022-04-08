@@ -4,7 +4,7 @@ terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = ">= 3.0.0"
+      version = ">= 3.0.0, < 4.0.0"
     }
   }
 }
@@ -25,12 +25,12 @@ module "sqs_queue" {
     delete  = ["sqs:DeleteMessage"]
   }
 
-  for_each = { for value in var.sqs_queues : value.arns => value.permissions }
+  for_each = var.sqs_queues
 
   role_name = var.role_name
 
-  resource_arns = each.key
-  permissions   = each.value
+  resource_arns = each.value.arns
+  permissions   = each.value.permissions
 }
 
 /*
@@ -52,12 +52,12 @@ module "sns_topic" {
     ]
   }
 
-  for_each = { for value in var.sns_topics : value.arns => value.permissions }
+  for_each = var.sns_topics
 
   role_name = var.role_name
 
-  resource_arns = each.key
-  permissions   = each.value
+  resource_arns = each.value.arns
+  permissions   = each.value.permissions
 }
 
 /*
@@ -92,12 +92,12 @@ module "s3_bucket" {
     ]
   }
 
-  for_each = { for value in var.s3_buckets : value.arns => value.permissions }
+  for_each = var.s3_buckets
 
   role_name = var.role_name
 
-  resource_arns = concat(each.key, formatlist("%s/*", each.key))
-  permissions   = each.value
+  resource_arns = concat(each.value.arns, formatlist("%s/*", each.value.arns))
+  permissions   = each.value.permissions
 }
 
 /*
@@ -127,12 +127,12 @@ module "dynamodb_table" {
     ]
   }
 
-  for_each = { for value in var.dynamodb_tables : value.arns => value.permissions }
+  for_each = var.dynamodb_tables
 
   role_name = var.role_name
 
-  resource_arns = each.key
-  permissions   = each.value
+  resource_arns = each.value.arns
+  permissions   = each.value.permissions
 }
 
 /*
@@ -161,12 +161,12 @@ module "kms_key" {
     ]
   }
 
-  for_each = { for value in var.kms_keys : value.arns => value.permissions }
+  for_each = var.kms_keys
 
   role_name = var.role_name
 
-  resource_arns = each.key
-  permissions   = each.value
+  resource_arns = each.value.arns
+  permissions   = each.value.permissions
 }
 
 /*
@@ -197,12 +197,12 @@ module "ssm_parameter_store" {
     ]
   }
 
-  for_each = { for value in var.ssm_parameters : value.arns => value.permissions }
+  for_each = var.ssm_parameters
 
   role_name = var.role_name
 
-  resource_arns = each.key
-  permissions   = each.value
+  resource_arns = each.value.arns
+  permissions   = each.value.permissions
 }
 
 /*
@@ -229,12 +229,12 @@ module "cloudwatch_metrics" {
     ]
   }
 
-  for_each = { for value in var.cloudwatch_metrics : value.arns => value.permissions }
+  for_each = var.cloudwatch_metrics
 
   role_name = var.role_name
 
-  resource_arns = each.key
-  permissions   = each.value
+  resource_arns = each.value.arns
+  permissions   = each.value.permissions
 }
 
 /*
@@ -272,10 +272,10 @@ module "secrets_manager" {
     ]
   }
 
-  for_each = { for value in var.secrets_manager : value.arns => value.permissions }
+  for_each = var.secrets_manager
 
   role_name = var.role_name
 
-  resource_arns = each.key
-  permissions   = each.value
+  resource_arns = each.value.arns
+  permissions   = each.value.permissions
 }
