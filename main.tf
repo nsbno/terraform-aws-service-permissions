@@ -25,7 +25,7 @@ module "sqs_queue" {
     delete  = ["sqs:DeleteMessage"]
   }
 
-  for_each = var.sqs_queues
+  for_each = toset(var.sqs_queues)
 
   role_name = var.role_name
 
@@ -52,7 +52,7 @@ module "sns_topic" {
     ]
   }
 
-  for_each = var.sns_topics
+  for_each = toset(var.sns_topics)
 
   role_name = var.role_name
 
@@ -92,7 +92,7 @@ module "s3_bucket" {
     ]
   }
 
-  for_each = var.s3_buckets
+  for_each = toset(var.s3_buckets)
 
   role_name = var.role_name
 
@@ -127,7 +127,7 @@ module "dynamodb_table" {
     ]
   }
 
-  for_each = var.dynamodb_tables
+  for_each = toset(var.dynamodb_tables)
 
   role_name = var.role_name
 
@@ -161,7 +161,7 @@ module "kms_key" {
     ]
   }
 
-  for_each = var.kms_keys
+  for_each = toset(var.kms_keys)
 
   role_name = var.role_name
 
@@ -197,7 +197,7 @@ module "ssm_parameter_store" {
     ]
   }
 
-  for_each = var.ssm_parameters
+  for_each = toset(var.ssm_parameters)
 
   role_name = var.role_name
 
@@ -229,7 +229,7 @@ module "cloudwatch_metrics" {
     ]
   }
 
-  for_each = var.cloudwatch_metrics
+  for_each = toset(var.cloudwatch_metrics)
 
   role_name = var.role_name
 
@@ -272,7 +272,7 @@ module "secrets_manager" {
     ]
   }
 
-  for_each = var.secrets_manager
+  for_each = toset(var.secrets_manager)
 
   role_name = var.role_name
 
