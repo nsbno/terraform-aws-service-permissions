@@ -28,14 +28,19 @@ module "permissions" {
 
   sqs_queues = [
     {
-      arn = data.aws_sqs_queue.arn
+      arns = [
+        data.aws_sqs_queue.arn,
+        data.aws_sqs_queue_two.arn
+      ]
       permissions = ["receive", "delete", "send"]
     }
   ]
 
   sns_topics = [
     {
-      arn = data.aws_sns_topic.arn
+      arns = [
+        data.aws_sns_topic.arn
+      ]
       permissions = ["subscription", "publish"]
     }
   ]

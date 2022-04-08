@@ -1,12 +1,12 @@
 variable "role_name" {
   description = "The role to attach the permissions to"
-  type = string
+  type        = string
 }
 
 variable "sqs_queues" {
   description = "Permissions for SQS resources"
   type = list(object({
-    arn = string
+    arns        = list(string)
     permissions = list(string)
   }))
 
@@ -16,7 +16,7 @@ variable "sqs_queues" {
 variable "sns_topics" {
   description = "Permissions for SNS Topics"
   type = list(object({
-    arn = string
+    arns        = list(string)
     permissions = list(string)
   }))
 
@@ -26,7 +26,7 @@ variable "sns_topics" {
 variable "s3_buckets" {
   description = "Permissions for S3 buckets"
   type = list(object({
-    arn = string
+    arns        = list(string)
     permissions = list(string)
   }))
 
@@ -36,7 +36,7 @@ variable "s3_buckets" {
 variable "dynamodb_tables" {
   description = "Permissions for DynamoDB Tables"
   type = list(object({
-    arn = string
+    arns        = list(string)
     permissions = list(string)
   }))
 
@@ -46,7 +46,7 @@ variable "dynamodb_tables" {
 variable "kms_keys" {
   description = "Permissions for KMS Keys"
   type = list(object({
-    arn = string
+    arns        = list(string)
     permissions = list(string)
   }))
 
@@ -56,7 +56,7 @@ variable "kms_keys" {
 variable "ssm_parameters" {
   description = "Permissions for SSM Parameters"
   type = list(object({
-    arn = string
+    arns        = list(string)
     permissions = list(string)
   }))
 
@@ -66,7 +66,7 @@ variable "ssm_parameters" {
 variable "cloudwatch_metrics" {
   description = "Permissions for CloudWatch Metrics. These endpoints don't care about the ARN, so * is recommended."
   type = list(object({
-    arn = string
+    arns        = list(string)
     permissions = list(string)
   }))
 
@@ -76,7 +76,7 @@ variable "cloudwatch_metrics" {
 variable "secrets_manager" {
   description = "Permissions for Secrets Manager"
   type = list(object({
-    arn = string
+    arns        = list(string)
     permissions = list(string)
   }))
 

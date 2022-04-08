@@ -21,16 +21,16 @@ module "sqs_queue" {
   default_permissions = ["sqs:GetQueueAttributes"]
   explicit_permissions = {
     receive = ["sqs:ReceiveMessage"]
-    send = ["sqs:SendMessage"]
-    delete = ["sqs:DeleteMessage"]
+    send    = ["sqs:SendMessage"]
+    delete  = ["sqs:DeleteMessage"]
   }
 
-  for_each = { for value in var.sqs_queues : value.arn => value.permissions }
+  for_each = { for value in var.sqs_queues : value.arns => value.permissions }
 
   role_name = var.role_name
 
-  resource_arns = [each.key]
-  permissions = each.value
+  resource_arns = each.key
+  permissions   = each.value
 }
 
 /*
@@ -52,12 +52,12 @@ module "sns_topic" {
     ]
   }
 
-  for_each = { for value in var.sns_topics : value.arn => value.permissions }
+  for_each = { for value in var.sns_topics : value.arns => value.permissions }
 
   role_name = var.role_name
 
-  resource_arns = [each.key]
-  permissions = each.value
+  resource_arns = each.key
+  permissions   = each.value
 }
 
 /*
@@ -69,7 +69,7 @@ module "sns_topic" {
 module "s3_bucket" {
   source = "./modules/policy"
 
-  default_permissions  = [
+  default_permissions = [
     # Allow users to see which region the bucket is in.
     # There isn't really any risk to this.
     "s3:GetBucketLocation",
@@ -92,12 +92,12 @@ module "s3_bucket" {
     ]
   }
 
-  for_each = {for value in var.s3_buckets : value.arn => value.permissions}
+  for_each = { for value in var.s3_buckets : value.arns => value.permissions }
 
   role_name = var.role_name
 
-  resource_arns = concat([each.key], formatlist("%s/*", [each.key]))
-  permissions  = each.value
+  resource_arns = concat(each.key, formatlist("%s/*", each.key))
+  permissions   = each.value
 }
 
 /*
@@ -109,7 +109,7 @@ module "s3_bucket" {
 module "dynamodb_table" {
   source = "./modules/policy"
 
-  default_permissions  = []
+  default_permissions = []
   explicit_permissions = {
     get = [
       "dynamodb:GetItem",
@@ -127,12 +127,12 @@ module "dynamodb_table" {
     ]
   }
 
-  for_each = {for value in var.dynamodb_tables : value.arn => value.permissions}
+  for_each = { for value in var.dynamodb_tables : value.arns => value.permissions }
 
   role_name = var.role_name
 
-  resource_arns = [each.key]
-  permissions  = each.value
+  resource_arns = each.key
+  permissions   = each.value
 }
 
 /*
@@ -144,7 +144,7 @@ module "dynamodb_table" {
 module "kms_key" {
   source = "./modules/policy"
 
-  default_permissions  = [
+  default_permissions = [
     # Allow for services to see details about the key.
     # Shouldn't really give any surface area.
     "kms:DescribeKey"
@@ -161,12 +161,12 @@ module "kms_key" {
     ]
   }
 
-  for_each = {for value in var.kms_keys : value.arn => value.permissions}
+  for_each = { for value in var.kms_keys : value.arns => value.permissions }
 
   role_name = var.role_name
 
-  resource_arns = [each.key]
-  permissions  = each.value
+  resource_arns = each.key
+  permissions   = each.value
 }
 
 /*
@@ -178,7 +178,7 @@ module "kms_key" {
 module "ssm_parameter_store" {
   source = "./modules/policy"
 
-  default_permissions  = []
+  default_permissions = []
   explicit_permissions = {
     get = [
       "ssm:GetParameters",
@@ -197,12 +197,12 @@ module "ssm_parameter_store" {
     ]
   }
 
-  for_each = {for value in var.ssm_parameters : value.arn => value.permissions}
+  for_each = { for value in var.ssm_parameters : value.arns => value.permissions }
 
   role_name = var.role_name
 
-  resource_arns = [each.key]
-  permissions  = each.value
+  resource_arns = each.key
+  permissions   = each.value
 }
 
 /*
@@ -217,7 +217,7 @@ module "ssm_parameter_store" {
 module "cloudwatch_metrics" {
   source = "./modules/policy"
 
-  default_permissions  = []
+  default_permissions = []
   explicit_permissions = {
     get = [
       "cloudwatch:GetMetricData",
@@ -229,12 +229,12 @@ module "cloudwatch_metrics" {
     ]
   }
 
-  for_each = {for value in var.cloudwatch_metrics : value.arn => value.permissions}
+  for_each = { for value in var.cloudwatch_metrics : value.arns => value.permissions }
 
   role_name = var.role_name
 
-  resource_arns = [each.key]
-  permissions  = each.value
+  resource_arns = each.key
+  permissions   = each.value
 }
 
 /*
@@ -246,7 +246,7 @@ module "cloudwatch_metrics" {
 module "secrets_manager" {
   source = "./modules/policy"
 
-  default_permissions  = [
+  default_permissions = [
   ]
   explicit_permissions = {
     get = [
@@ -272,10 +272,10 @@ module "secrets_manager" {
     ]
   }
 
-  for_each = {for value in var.secrets_manager : value.arn => value.permissions}
+  for_each = { for value in var.secrets_manager : value.arns => value.permissions }
 
   role_name = var.role_name
 
-  resource_arns = [each.key]
-  permissions  = each.value
+  resource_arns = each.key
+  permissions   = each.value
 }
