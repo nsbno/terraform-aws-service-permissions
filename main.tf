@@ -27,7 +27,7 @@ module "sqs_queue" {
 
   role_name = var.role_name
 
-  count = length(var.sqs_queues)
+  count         = length(var.sqs_queues)
   resource_arns = var.sqs_queues[count.index].arns
   permissions   = var.sqs_queues[count.index].permissions
 }
@@ -53,7 +53,7 @@ module "sns_topic" {
 
   role_name = var.role_name
 
-  count = length(var.sns_topics)
+  count         = length(var.sns_topics)
   resource_arns = var.sns_topics[count.index].arns
   permissions   = var.sns_topics[count.index].permissions
 }
@@ -92,7 +92,7 @@ module "s3_bucket" {
 
   role_name = var.role_name
 
-  count = length(var.s3_buckets)
+  count         = length(var.s3_buckets)
   resource_arns = concat(var.s3_buckets[count.index].arns, formatlist("%s/*", var.s3_buckets[count.index].arns))
   permissions   = var.s3_buckets[count.index].permissions
 }
@@ -126,7 +126,7 @@ module "dynamodb_table" {
 
   role_name = var.role_name
 
-  count = length(var.dynamodb_tables)
+  count         = length(var.dynamodb_tables)
   resource_arns = var.dynamodb_tables[count.index].arns
   permissions   = var.dynamodb_tables[count.index].permissions
 }
@@ -159,7 +159,7 @@ module "kms_key" {
 
   role_name = var.role_name
 
-  count = length(var.kms_keys)
+  count         = length(var.kms_keys)
   resource_arns = var.kms_keys[count.index].arns
   permissions   = var.kms_keys[count.index].permissions
 }
@@ -194,7 +194,7 @@ module "ssm_parameter_store" {
 
   role_name = var.role_name
 
-  count = length(var.ssm_parameters)
+  count         = length(var.ssm_parameters)
   resource_arns = var.ssm_parameters[count.index].arns
   permissions   = var.ssm_parameters[count.index].permissions
 }
@@ -225,7 +225,7 @@ module "cloudwatch_metrics" {
 
   role_name = var.role_name
 
-  count = length(var.cloudwatch_metrics)
+  count         = length(var.cloudwatch_metrics)
   resource_arns = var.cloudwatch_metrics[count.index].arns
   permissions   = var.cloudwatch_metrics[count.index].permissions
 }
@@ -267,7 +267,7 @@ module "secrets_manager" {
 
   role_name = var.role_name
 
-  count = length(var.secrets_manager)
+  count         = length(var.secrets_manager)
   resource_arns = var.secrets_manager[count.index].arns
   permissions   = var.secrets_manager[count.index].permissions
 }
