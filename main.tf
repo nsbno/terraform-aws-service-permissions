@@ -25,12 +25,11 @@ module "sqs_queue" {
     delete  = ["sqs:DeleteMessage"]
   }
 
-  for_each = { for value in var.sqs_queues : index(var.sqs_queues, value) => value }
-
   role_name = var.role_name
 
-  resource_arns = each.value.arns
-  permissions   = each.value.permissions
+  count = length(var.sqs_queues)
+  resource_arns = var.sqs_queues[count.index].arns
+  permissions   = var.sqs_queues[count.index].permissions
 }
 
 /*
@@ -52,12 +51,11 @@ module "sns_topic" {
     ]
   }
 
-  for_each = { for value in var.sns_topics : index(var.sns_topics, value) => value }
-
   role_name = var.role_name
 
-  resource_arns = each.value.arns
-  permissions   = each.value.permissions
+  count = length(var.sns_topics)
+  resource_arns = var.sns_topics[count.index].arns
+  permissions   = var.sns_topics[count.index].permissions
 }
 
 /*
@@ -92,12 +90,11 @@ module "s3_bucket" {
     ]
   }
 
-  for_each = { for value in var.s3_buckets : index(var.s3_buckets, value) => value }
-
   role_name = var.role_name
 
-  resource_arns = concat(each.value.arns, formatlist("%s/*", each.value.arns))
-  permissions   = each.value.permissions
+  count = length(var.s3_buckets)
+  resource_arns = concat(var.s3_buckets[count.index].arns, formatlist("%s/*", var.s3_buckets[count.index].arns))
+  permissions   = var.s3_buckets[count.index].permissions
 }
 
 /*
@@ -127,12 +124,11 @@ module "dynamodb_table" {
     ]
   }
 
-  for_each = { for value in var.dynamodb_tables : index(var.dynamodb_tables, value) => value }
-
   role_name = var.role_name
 
-  resource_arns = each.value.arns
-  permissions   = each.value.permissions
+  count = length(var.dynamodb_tables)
+  resource_arns = var.dynamodb_tables[count.index].arns
+  permissions   = var.dynamodb_tables[count.index].permissions
 }
 
 /*
@@ -161,12 +157,11 @@ module "kms_key" {
     ]
   }
 
-  for_each = { for value in var.kms_keys : index(var.kms_keys, value) => value }
-
   role_name = var.role_name
 
-  resource_arns = each.value.arns
-  permissions   = each.value.permissions
+  count = length(var.kms_keys)
+  resource_arns = var.kms_keys[count.index].arns
+  permissions   = var.kms_keys[count.index].permissions
 }
 
 /*
@@ -197,12 +192,11 @@ module "ssm_parameter_store" {
     ]
   }
 
-  for_each = { for value in var.ssm_parameters : index(var.ssm_parameters, value) => value }
-
   role_name = var.role_name
 
-  resource_arns = each.value.arns
-  permissions   = each.value.permissions
+  count = length(var.ssm_parameters)
+  resource_arns = var.ssm_parameters[count.index].arns
+  permissions   = var.ssm_parameters[count.index].permissions
 }
 
 /*
@@ -229,12 +223,11 @@ module "cloudwatch_metrics" {
     ]
   }
 
-  for_each = { for value in var.cloudwatch_metrics : index(var.cloudwatch_metrics, value) => value }
-
   role_name = var.role_name
 
-  resource_arns = each.value.arns
-  permissions   = each.value.permissions
+  count = length(var.cloudwatch_metrics)
+  resource_arns = var.cloudwatch_metrics[count.index].arns
+  permissions   = var.cloudwatch_metrics[count.index].permissions
 }
 
 /*
@@ -272,10 +265,9 @@ module "secrets_manager" {
     ]
   }
 
-  for_each = { for value in var.secrets_manager : index(var.secrets_manager, value) => value }
-
   role_name = var.role_name
 
-  resource_arns = each.value.arns
-  permissions   = each.value.permissions
+  count = length(var.secrets_manager)
+  resource_arns = var.secrets_manager[count.index].arns
+  permissions   = var.secrets_manager[count.index].permissions
 }
