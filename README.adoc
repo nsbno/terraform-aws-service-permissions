@@ -24,7 +24,7 @@ Add the module directly in your microservice's infrastructure!
 module "permissions" {
   source = "github.com/nsbno/terraform-aws-service-permissions?ref=x.y.z"
 
-  role_arn = module.service.role_arn
+  role_name = module.service.role_name
 
   sqs_queues = [
     {
