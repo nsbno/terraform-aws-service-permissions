@@ -75,7 +75,8 @@ module "s3_bucket" {
     # Though it does potentially give a malicious actor the ability to see what
     # kind of data is in the bucket. However, this is such a small risk, that
     # we'll blanket allow it.
-    "s3:ListBucket"
+    "s3:ListBucket",
+    "s3:ListBucketVersions"
   ]
   explicit_permissions = {
     get = [
