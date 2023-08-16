@@ -82,3 +82,13 @@ variable "secrets_manager" {
 
   default = []
 }
+
+variable "appconfig" {
+  description = "Permissions for AppConfig"
+  type = list(object({
+    arns        = list(string)
+    permissions = list(string)
+  }))
+
+  default = []
+}
