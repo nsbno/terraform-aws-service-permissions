@@ -305,7 +305,6 @@ module "appconfig" {
     create = [
       "appconfig:CreateConfigurationProfile",
       "appconfig:CreateEnvironment",
-      "appconfig:CreateExtensionAssociation",
       "appconfig:CreateHostedConfigurationVersion",
     ]
     manage = [
