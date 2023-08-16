@@ -125,6 +125,21 @@ Due to broad permissions, `BatchWrite` is located here
 |Create a secret
 |`delete`
 |Delete (or restore) a secret
+
+1.6+|`appconfig`
+1.6+|None
+|`list`
+|List configuration profiles, environments, deployments or configuration versions.
+|`get`
+|Get configuration, configuration profiles, deployment, environment, configuration version or latest configuration.
+|`start`
+|Start configuration session or start deployment.
+|`create`
+|Create configuration profile, environment or configuration version.
+|`manage`
+|Update configuration profile or environment and validate configuration.
+|`delete`
+|Delete configuration profile, environment or configuration version.
 |===
 
 == Relevant Repositories

@@ -272,3 +272,55 @@ module "secrets_manager" {
   resource_arns = var.secrets_manager[count.index].arns
   permissions   = var.secrets_manager[count.index].permissions
 }
+
+/*
+ * == Appconfig
+ *
+ * Reference to available permissions can be found in the AWS docs:
+ * https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsappconfig.html
+ */
+module "appconfig" {
+  source = "./modules/policy"
+
+  default_permissions = []
+  explicit_permissions = {
+    start = [
+      "appconfig:StartConfigurationSession",
+      "appconfig:StartDeployment",
+    ]
+    get = [
+      "appconfig:GetConfiguration",
+      "appconfig:GetConfigurationProfile",
+      "appconfig:GetDeployment",
+      "appconfig:GetEnvironment",
+      "appconfig:GetHostedConfigurationVersion",
+      "appconfig:GetLatestConfiguration",
+    ]
+    list = [
+      "appconfig:ListConfigurationProfiles",
+      "appconfig:ListDeployments",
+      "appconfig:ListEnvironments",
+      "appconfig:ListHostedConfigurationVersions",
+    ]
+    create = [
+      "appconfig:CreateConfigurationProfile",
+      "appconfig:CreateEnvironment",
+      "appconfig:CreateHostedConfigurationVersion",
+    ]
+    manage = [
+      "appconfig:UpdateConfigurationProfile",
+      "appconfig:UpdateEnvironment",
+      "appconfig:ValidateConfiguration",
+    ]
+    delete = [
+      "appconfig:DeleteConfigurationProfile",
+      "appconfig:DeleteEnvironment",
+      "appconfig:DeleteHostedConfigurationVersion",
+    ]
+  }
+  role_name = var.role_name
+
+  count         = length(var.appconfig)
+  resource_arns = var.appconfig[count.index].arns
+  permissions   = var.appconfig[count.index].permissions
+}
