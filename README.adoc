@@ -5,15 +5,13 @@
 
 Set up your service with typical permissions used at Vy!
 
-toc::[]
-
-== About
-
 This module will give you most of the basic permissions you need when setting up your service.
 This includes SQS, SNS, DynamoDB, KMS and more!
 
 Feel like something is missing?
-Open a pull request or send a message on #team-infrastructure-public!
+Open a pull request or send a message on ##team-utviklerplattform-diskusjoner!
+
+toc::[]
 
 == Usage
 
