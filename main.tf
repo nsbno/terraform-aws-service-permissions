@@ -23,6 +23,7 @@ module "sqs_queue" {
     receive = ["sqs:ReceiveMessage"]
     send    = ["sqs:SendMessage"]
     delete  = ["sqs:DeleteMessage"]
+    move    = ["sqs:StartMessageMoveTask"]
   }
 
   role_name = var.role_name

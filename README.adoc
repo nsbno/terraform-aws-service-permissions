@@ -60,6 +60,8 @@ Here are all the services and permissions.
 |Send messages to the queue
 |`delete`
 |Delete messages from the queue
+|`move`
+|Start a message move task for the queue
 
 1.2+|`sns_topics`
 1.2+|None
