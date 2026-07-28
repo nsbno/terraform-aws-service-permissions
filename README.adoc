@@ -115,7 +115,7 @@ Due to broad permissions, `BatchWrite` is located here
 |`put`
 |Add a datapoint to a metric.
 
-1.4+|`secrets_manger`
+1.4+|`secrets_manager`
 1.4+|None
 |`get`
 |Get a secret's value and metadata
