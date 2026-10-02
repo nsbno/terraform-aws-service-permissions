@@ -83,9 +83,11 @@ module "s3_bucket" {
     get = [
       "s3:GetObject",
       "s3:GetObjectVersion",
+      "s3:GetObjectTagging",
     ]
     put = [
-      "s3:PutObject"
+      "s3:PutObject",
+      "s3:PutObjectTagging",
     ]
     delete = [
       "s3:DeleteObject"
